@@ -3707,7 +3707,7 @@ namespace {
 
 		if (((m_ses.get_ipv6_interface() && tracker_ip.is_v4())
 			|| (m_ses.get_ipv4_interface() && tracker_ip.is_v6()))
-			&& !r.second_announce)
+			&& !r.second_announce && !m_torrent_file->priv())
 		{
 			std::list<address>::const_iterator i = std::find_if(tracker_ips.begin()
 				, tracker_ips.end(), boost::bind(&address::is_v4, _1) != tracker_ip.is_v4());
