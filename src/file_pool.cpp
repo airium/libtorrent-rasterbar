@@ -49,7 +49,6 @@ namespace libtorrent
 {
 	file_pool::file_pool(int size)
 		: m_size(size)
-		, m_low_prio_io(true)
 	{
 	}
 
@@ -176,10 +175,6 @@ namespace libtorrent
 					m_files.erase(i);
 					return file_handle();
 				}
-#ifdef TORRENT_WINDOWS
-				if (m_low_prio_io)
-					set_low_priority(e.file_ptr);
-#endif
 
 				TORRENT_ASSERT(e.file_ptr->is_open());
 				e.mode = m;
@@ -197,10 +192,7 @@ namespace libtorrent
 		std::string full_path = fs.file_path(file_index, p);
 		if (!e.file_ptr->open(full_path, m, ec))
 			return file_handle();
-#ifdef TORRENT_WINDOWS
-		if (m_low_prio_io)
-			set_low_priority(e.file_ptr);
-#endif
+
 		e.mode = m;
 		file_handle file_ptr = e.file_ptr;
 		m_files.insert(std::make_pair(std::make_pair(st, file_index), e));

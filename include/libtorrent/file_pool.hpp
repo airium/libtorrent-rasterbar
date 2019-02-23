@@ -106,7 +106,6 @@ namespace libtorrent
 		int size_limit() const { return m_size; }
 
 		// internal
-		void set_low_prio_io(bool b) { m_low_prio_io = b; }
 		void get_status(std::vector<pool_file_status>* files, void* st) const;
 
 		// close the file that was opened least recently (i.e. not *accessed*
@@ -129,7 +128,6 @@ namespace libtorrent
 		file_handle remove_oldest(mutex::scoped_lock&);
 
 		int m_size;
-		bool m_low_prio_io;
 
 		struct lru_file_entry
 		{
