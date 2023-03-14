@@ -3420,7 +3420,7 @@ bool is_downloading_state(int const st)
 				if (resp.incomplete >= 0) aep->scrape_incomplete = resp.incomplete;
 				if (resp.complete >= 0) aep->scrape_complete = resp.complete;
 				if (resp.downloaded >= 0) aep->scrape_downloaded = resp.downloaded;
-				if (!aep->start_sent && r.event == tracker_request::started)
+				if (!aep->start_sent && (r.event == tracker_request::started || r.event == tracker_request::paused))
 					aep->start_sent = true;
 				if (!aep->complete_sent && r.event == tracker_request::completed)
 				{
