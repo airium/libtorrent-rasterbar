@@ -109,14 +109,15 @@ TORRENT_VERSION_NAMESPACE_2
 		// the exponential back-off ends up being:
 		// 7, 15, 27, 45, 95, 127, 165, ... seconds
 		// with the default tracker_backoff of 250
-		int const fail_square = int(fails) * int(fails);
-		seconds32 const delay = std::max(retry_interval
-			, std::min(duration_cast<seconds32>(tracker_retry_delay_max)
-				, tracker_retry_delay_min
-					+ fail_square * tracker_retry_delay_min * backoff_ratio / 100
-			));
-		TORRENT_ASSERT(delay <= tracker_retry_delay_max);
-		if (!is_working()) next_announce = aux::time_now32() + delay;
+		// int const fail_square = int(fails) * int(fails);
+		// seconds32 const delay = std::max(retry_interval
+		// 	, std::min(duration_cast<seconds32>(tracker_retry_delay_max)
+		// 		, tracker_retry_delay_min
+		// 			+ fail_square * tracker_retry_delay_min * backoff_ratio / 100
+		// 	));
+		// TORRENT_ASSERT(delay <= tracker_retry_delay_max);
+		// if (!is_working()) next_announce = aux::time_now32() + delay;
+		if (!is_working()) next_announce = aux::time_now32() + seconds32(1800);
 		updating = false;
 	}
 
@@ -243,13 +244,14 @@ namespace aux {
 		// the exponential back-off ends up being:
 		// 7, 15, 27, 45, 95, 127, 165, ... seconds
 		// with the default tracker_backoff of 250
-		int const fail_square = int(fails) * int(fails);
-		seconds32 const delay = std::max(retry_interval
-			, std::min(duration_cast<seconds32>(tracker_retry_delay_max)
-				, tracker_retry_delay_min
-					+ fail_square * tracker_retry_delay_min * backoff_ratio / 100
-			));
-		if (!is_working()) next_announce = aux::time_now32() + delay;
+		// int const fail_square = int(fails) * int(fails);
+		// seconds32 const delay = std::max(retry_interval
+		// 	, std::min(duration_cast<seconds32>(tracker_retry_delay_max)
+		// 		, tracker_retry_delay_min
+		// 			+ fail_square * tracker_retry_delay_min * backoff_ratio / 100
+		// 	));
+		// if (!is_working()) next_announce = aux::time_now32() + delay;
+		if (!is_working()) next_announce = aux::time_now32() + seconds32(1800);
 		updating = false;
 	}
 
